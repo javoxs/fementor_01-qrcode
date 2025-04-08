@@ -1,0 +1,217 @@
+/* LEARN:
+### 2. Modern CSS
+    - **CSS Variables**: Implemented a complete system of CSS variables for colors, spacing, borders, shadows, and typography.
+    - **Flexbox**: Used flexbox to center content and create flexible layouts.
+    - **Transitions and animations**: Added subtle hover effects to improve interactivity.
+    - **Aspect-ratio**: Used the modern aspect-ratio property to maintain the image proportion.
+    - **Media queries**: Implemented media queries for:
+    - Responsiveness on different screen sizes
+    - User preferences (dark mode and reduced motion)
+
+### 3. Optimizations
+    - **CSS Reset**: Included a basic reset to normalize styles across browsers.
+    - **Spacing system**: Created a consistent spacing system with variables.
+    - **Accessibility optimization**:
+    - Improved color contrast
+    - Added support for user preferences
+    - Included descriptive meta tags
+
+### 4. Visual effects
+    - Soft shadows to give depth to the card
+    - Subtle hover effects to improve interactivity
+    - Smooth transitions for a more pleasant experience */
+
+/* LEARN: pay attention to categories: Colors, Spacing, Borders, Shadows, Typography.
+    - Use the same naming convention for all variables.
+    - Use the same units for all variables (rem, px, etc.).
+    - Use the same color format (hex, rgb, hsl, etc.) for all colors.
+    - Use the same font family for all typography variables.
+    - Use the same font size and weight for all typography variables. */
+
+/* ===== VARIABLES ===== */
+:root {
+    /* Colors */
+    --color-background: #d6e2f0;
+    --color-card: #ffffff;
+    --color-qr-background: #2c7dfa;
+    --color-title: #1f3251;
+    --color-text: #7b879d;
+    --color-link: hsl(228, 45%, 44%);
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    
+    /* Borders */
+    --border-radius-sm: 0.5rem;
+    --border-radius-md: 1rem;
+    --border-radius-lg: 1.25rem;
+    
+    /* Shadows */
+    --shadow-card: 0 1rem 2rem rgba(0, 0, 0, 0.08);
+    
+    /* Typography */
+    --font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-size-small: 0.9rem;
+    --font-size-medium: 1rem;
+    --font-size-large: 1.35rem;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --line-height: 1.5;
+  }
+
+  
+  /* ===== RESET ===== */
+  /* LEARN: Reset is a CSS reset that removes default browser styles */
+  /* and provides a clean slate for styling. */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* ===== BASE STYLES ===== */
+  html {
+    font-size: 16px;
+  }
+  
+  body {
+    font-family: var(--font-family);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: var(--line-height);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-md);
+  }
+  
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  
+  /* ===== CONTAINER ===== */
+  .container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* ===== QR CARD ===== */
+  .qr-card {
+    background-color: var(--color-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-card);
+    max-width: 320px;
+    width: 100%;
+    padding: var(--spacing-md);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .qr-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .qr-card__image-container {
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+  }
+  
+  .qr-card__image {
+    width: 100%;
+    height: auto;
+    background-color: var(--color-qr-background);
+    border-radius: var(--border-radius-md);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .qr-card:hover .qr-card__image {
+    transform: scale(1.02);
+  }
+  
+  .qr-card__header {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .qr-card__title {
+    color: var(--color-title);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .qr-card__text {
+    color: var(--color-text);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-normal);
+    padding: 0 var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  /* ===== FOOTER ===== */
+  .attribution {
+    font-size: 11px;
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    color: var(--color-text);
+  }
+  
+  .attribution a {
+    color: var(--color-link);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .attribution a:hover {
+    text-decoration: underline;
+    color: var(--color-qr-background);
+  }
+  
+  /* ===== MEDIA QUERIES ===== */
+  @media screen and (min-width: 768px) {
+    .qr-card {
+      max-width: 340px;
+    }
+  }
+  
+  /* ===== ACCESSIBILITY ===== */
+  @media (prefers-reduced-motion: reduce) {
+    .qr-card,
+    .qr-card__image,
+    .attribution a {
+      transition: none;
+    }
+    
+    .qr-card:hover {
+      transform: none;
+    }
+    
+    .qr-card:hover .qr-card__image {
+      transform: none;
+    }
+  }
+  
+  /* For users who prefer dark mode */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background: #1a1a2e;
+      --color-card: #2a2a3e;
+      --color-title: #e6e6ff;
+      --color-text: #b8b8d0;
+    }
+  }
